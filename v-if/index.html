@@ -1,0 +1,137 @@
+<!--V-ON-->
+
+<!--O v-on é uma diretiva que permite observarmos eventos nas tags.-->
+<body>
+  <div id="app">
+    <button v-on:click="handleClick">Clique</a>
+  </div>
+</body>
+
+<script>
+  const vm = new Vue({
+  el: '#app',
+  methods: {
+    handleClick(event) {
+      console.log(event);
+    },
+  },
+});
+</script>
+
+<!--ATALHO @-->
+
+<!--O uso do arroba @click na frente do evento, é a mesma coisa que utilizarmos o v-on:click.-->
+
+<body>
+  <div id="app">
+    <button @click="handleClick">Clique</a>
+  </div>
+</body>
+
+<script>
+  const vm = new Vue({
+  el: '#app',
+  methods: {
+    handleClick(event) {
+      console.log(event);
+    },
+  },
+});
+</script>
+
+<!--EXPRESSÕES-->
+
+<!--Não precisa ser necessariamente um método, podemos usar expressões dentro dos eventos.-->
+
+<body>
+  <div id="app">
+    <button @click="ativo = !ativo">Ativar</button>
+    <p :class="ativo ? 'verde' : 'vermelho'">Texto de teste.</p>
+  </div>
+  
+</body>
+
+<script>
+  const vm = new Vue({
+  el: '#app',
+  data: {
+    ativo: true,
+  },
+});
+</script>
+
+<!--MODIFICADORES-->
+
+<!--Algumas diretivas possuem modificadores. Estes são utilizados através do .. No caso de eventos, event.preventDefault() pode ser adicionar com o @click.prevent.-->
+
+<body>
+  <div id="app">
+    <a @click.prevent="scrollSuave" href="#interno">Prevent</a>
+    <a @click.once="scrollSuave" href="#interno">Once</a>
+    <a @click.prevent.once="scrollSuave" href="#interno">Once</a>
+  </div>
+</body>
+
+<script>
+  const vm = new Vue({
+  el: '#app',
+  methods: {
+    scrollSuave() {
+      console.log('Scroll Suave');
+    },
+  },
+});
+</script>
+
+<!--Lista com modificadores https://vuejs.org/v2/api/#v-on-->
+
+<!--OUTROS EVENTOS-->
+
+<!--Podemos adicionar diversos eventos como @keyup, @mouseenter, @change e mais.-->
+
+<body>
+  <div id="app">
+    <div @mousemove="handleMouse">Mouse X: {{mouse.x}}</div>
+    <input @keyup="handleKey" type="text" />
+  </div>
+</body>
+
+<script>
+  const vm = new Vue({
+  el: '#app',
+  data: {
+    mouse: '',
+  },
+  methods: {
+    handleKey(event) {
+      console.log(event.key);
+    },
+    handleMouse(event) {
+      this.mouse = event;
+    },
+  },
+});
+</script>
+
+<!--EXERCÍCIO-->
+
+<ul>
+  <li><a href="https://api.origamid.dev/stock/aapl/quote">Apple</a></li>
+  <li><a href="https://api.origamid.dev/stock/googl/quote">Google</a></li>
+  <li><a href="https://api.origamid.dev/stock/amzn/quote">Amazon</a></li>
+  <li><a href="https://api.origamid.dev/stock/ebay/quote">Ebay</a></li>
+  <li><a href="https://api.origamid.dev/stock/pypl/quote">Paypal</a></li>
+</ul>
+
+<div></div>
+<!--
+  Utilizando API
+  https://api.origamid.dev/stock/aapl/quote
+
+  Adicione um evento de clique a cada <a> do html
+  acima e previna o comportamento padrão.
+
+  Faça o fetch dos dados do href ao click e mostre na
+  interface o companyName, latestPrice, marketCap
+-->
+
