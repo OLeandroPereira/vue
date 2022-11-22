@@ -1,0 +1,87 @@
+<!--V-HTML-->
+
+<!--Renderiza conteúdo html dentro de uma tag. Modifica o innerHtml do elemento.-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <div v-html="link"></div>
+    <div>{{link}}</div>
+  </div>
+  
+</body>
+
+<script>
+  const vm = new Vue({
+  el: "#app",
+  data: {
+    link: "<a href='https://www.origamid.com'>Origamid</a>"
+  }
+});
+
+</script>
+
+<!--Cuidado, não utilize o v-html para conteúdo não confiável.-->
+
+<!--V-TEXT-->
+
+<!--Renderiza texto dentro de uma tag.-->
+
+<body>
+  <div id="app">
+    <div v-text="fruta"></div>
+    <div>{{fruta}}</div>
+  </div>
+
+  <script>
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        fruta: "Banana"
+      }
+    });
+  </script>
+</body>
+
+<!--V-ONCE-->
+
+<!--Renderiza uma única vez o conteúdo e não torna ele reativo.-->
+
+<body>
+  <div id="app">
+    <p v-once>Valor inicial: R$ {{total}}</p>
+    <button @click="gasto += 5">Comprar Banana R$ 5</button>
+    <p>Gasto: R$ {{gasto}}</p>
+    <p>Saldo: R$ {{total - gasto}}</p>
+  </div>
+</body>
+
+<script>
+  const vm = new Vue({
+    el: "#app",
+    data: {
+      total: 150,
+      gasto: 0
+    }
+  });
+</script>
+
+<!--EXERCÍCIO-->
+
+<!--
+  Renderize o conteúdo, apenas uma vez (não torne o mesmo reativo):
+
+  lista: "<ul><li>Item 1</li><li>Item 2</li><li>Item 3</li></ul>"
+-->
+
+
+
+
+</html>
