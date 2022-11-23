@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+<!--V-FOR-->
+
+<!--Renderiza uma lista de itens. Assim como o for loop, ele irá executar para cada item da array/objeto.-->
+
+<div id="app">
+  <ul>
+    <li v-for="(curso, index) in cursos">{{curso}}</li>
+  </ul>
+</div>
+
+<script>
+  const vm = new Vue({
+    el: "#app",
+    data: {
+      cursos: ["HTML", "CSS", "JavaScript", "PHP", "WordPress"]
+    }
+  });
+
+</script>
+
+<body>
+  
+  <!--V-FOR OBJETOS-->
+
+  <div id="app">
+    <div v-for="estado in estados">
+      <p>{{estado.nome}}</p>
+      <p>{{estado.populacao}}</p>
+    </div>
+  </div>
+
+  <script>
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        cursos: ["HTML", "CSS", "JavaScript", "PHP", "WordPress"]
+      }
+    });
+  </script>
+
+</body>
+
+<!--V-FOR OBJETOS-->
+
+<body>
+  <div id="app">
+    <div v-for="estado in estados">
+      <p>{{estado.nome}}</p>
+      <p>{{estado.populacao}}</p>
+    </div>
+  </div>
+</body>
+
+<script>
+  const vm = new Vue({
+    el: "#app",
+    data: {
+      estados: {
+        sp: {
+          populacao: "45 milhões",
+          nome: "São Paulo"
+        },
+        mg: {
+          populacao: "21 milhões",
+          nome: "Minas Gerais"
+        },
+        rj: {
+          populacao: "17 milhões",
+          nome: "Rio de Janeiro"
+        }
+      }
+    }
+  });
+</script>
+
+<!--V-FOR PARÂMETROS-->
+
+<!--Para arrays você pode utilizar o valor e o index de cada item. Para objetos é possível utilizar, valor, chave e index.-->
+
+<body>
+  <div id="app">
+    <div v-for="(value, index) in lista">
+      <p>{{index}}: {{value}}</p>
+    </div>
+    <div v-for="(value, key, index) in melancia">
+      <p>{{index}} {{key}}: {{value}}</p>
+    </div>
+  </div>
+</body>
+
+  <script>
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        lista: ["Item 1", "Item 2", "Item 3"],
+        melancia: {
+          cor: "Verde",
+          peso: "10kg",
+          preco: "R$ 15"
+        }
+      }
+    });
+
+  </script>
+
+
+    <!--:KEY-->
+
+    <!--Cria uma identificação única para o item. Sem o key, bugs podem ocorrer principalmente em componentes mais complexos.-->
+  <body>
+    <div id="app">
+      <div v-for="fruta in frutas" :key="fruta.id">
+        <p>{{fruta.nome}}</p>
+        <p>{{fruta.cor}}</p>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        frutas: [
+          {
+            id: "banana-1",
+            nome: "Banana",
+            cor: "Amarela"
+          },
+          {
+            id: "melancia-1",
+            nome: "Melancia",
+            cor: "Verde"
+          }
+        ]
+      }
+    });
+  </script>
+
+  <!--REATIVIDADE-->
+
+  <!--Modificar diretamente o valor de uma array, não irá ativar a reatividade do Vue.-->
+  
+
+  <body>
+    <div id="app">
+      <ul>
+        <li v-for="item in lista">{{item}}</li>
+      </ul>
+      <button @click="removerItem">Remover</button>
+      <button @click="mudarItem">Mudar</button>
+    </div>
+  </body>
+
+  <script>
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        lista: ["Item 1", "Item 2", "Item 3"]
+      },
+      methods: {
+        removerItem() {
+          this.lista.pop(); // Ativa reatividade
+        },
+        mudarItem() {
+          this.lista[0] = "Banana"; // Não ativa reatividade
+        }
+      }
+    });
+  </script>
+
+  <!--EXERCÍCIO-->
+
+  <!--
+  Utilizando a api:
+  https://viacep.com.br/ws/04538133/json/
+  Mostre o cep, logradouro, complemento, bairro, localidade e uf do que for retornado.
+
+  
+  Use o arquivo json da aula, para listar os cursos e as matérias.
+-->
+
+
+
+</body>
+</html>
