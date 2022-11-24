@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!--COMPUTED-->
+
+  <!--Quando precisamos modificar um dado usando JavaScript, podemos utilizar uma propriedade dentro de computed.-->
+
+  <div id="app">
+    <p>{{total}}</p>
+  </div>
+  
+  <script>
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        preco: 59,
+        desconto: 10
+        },
+        computed: {
+          total() {
+            return "R$ " + (this.preco - this.desconto);
+          }
+        }
+      });
+
+  </script>
+
+  <!--COMPUTED EX:-->
+
+  <div id="app">
+    <p v-for="carro in carrosAzuis">{{carro.marca}}</p>
+  </div>
+
+  <script>
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        carros: [
+          {
+            marca: "VW",
+            cor: "Azul"
+          },
+          {
+            marca: "Ford",
+            cor: "Preto"
+          },
+          {
+            marca: "Tesla",
+            cor: "Azul"
+          }
+        ]
+      },
+      computed: {
+        carrosAzuis() {
+          return this.carros.filter(({ cor }) => cor === "Azul");
+        }
+      }
+    });
+  </script>
+
+  <!--WATCH-->
+
+  <!--É possível ativar uma função toda vez que um dado reativo é modificado. Para isso usamos uma propriedade dentro de watch.-->
+
+  <div id="app">
+    <p>{{contador}}</p>
+    <button @click="contador++">Adicionar</button>
+  </div>
+  
+  <script>
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        contador: 0
+      },
+      watch: {
+        contador() {
+          console.log(this.contador);
+        }
+      }
+    });
+  </script>
+
+  <!--WATCH ASSINCRONO-->]
+
+  <!--O watch se diferencia do computed principalmente pela sua capacidade de receber eventos assincronos.-->
+
+  <div id="app">
+    <input type="text" v-model="cep" placeholder="Cep" maxlength="8" />
+    <ul>
+      <li v-for="(valor, chave) in endereco">{{chave}}: {{valor}}</li>
+    </ul>
+  </div>
+
+  <script>
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        cep: "",
+        endereco: {}
+      },
+      watch: {
+        cep(valor) {
+          if (valor.length === 8) {
+            fetch(`https://viacep.com.br/ws/${valor}/json/`)
+              .then(r => r.json())
+              .then(r => {
+                this.endereco = r;
+              });
+          }
+        }
+      }
+    });
+  </script>
+
+  <!--EXERCÍCIO-->
+
+  <!--
+    Você possui o nome e sobrenome do usuário em data,
+    crie uma propriedade computed que retorne o nome completo
+    
+    Utilize a rest API para puxar as capitais dos paises
+    Use um campo de select, onde o usuário pode selecionar o país.
+    https://restcountries.com/v2/all
+  
+    Com uma função watch, mude a capital de acordo com o país selecionado:
+  
+    Ex de campo select:
+  
+    <select name="paises" id="paises" v-model="selecionado">
+      <option v-for="pais in paises" :value="pais.name">
+        {{pais.name}}
+      </option>
+    </select>
+  -->
+  
+
+</body>
+</html>
