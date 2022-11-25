@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!--DATA-->
+
+  <!--A propriedade data é responsável por dar a reatividade aos estados definindo os seus getters e setters. Ela recebe um objeto ou uma função.-->
+
+  <div id="app">
+    <h1>{{titulo}}</h1>
+  </div>
+
+  <script>
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        titulo: "Vue.js Completo"
+      }
+    });
+  </script>
+
+  <!--PROXY-->
+
+  <!--Toda propriedade dentro de data, é também representada diretamente no objeto Vue (proxy). Se começar com $ ou _ não é feito o proxy para evitar conflito com as propriedades de Vue.-->
+
+  <script>
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        titulo: "Vue.js Completo",
+        $preco: 59
+      }
+    });
+
+    vm.$data.titulo; // Vue.js Completo
+    vm.titulo; // Vue.js Completo
+
+    vm.$data.$preco; // 59
+    vm.$preco; // undefined
+
+  </script>
+
+  <!--SEMPRE DEFINIR-->
+
+  <!--Sempre defina os estados no data, mesmo que você ainda não possua o valor. É o registro no data que garante a reatividade.-->
+
+  <script>
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        logado: ""
+      }
+    });
+
+    setTimeout(() => {
+      vm.logado = "Sim";
+    }, 2000);
+  </script>
+ 
+ 
+ <!--DIFERENTES TIPOS-->
+
+ <!--Qualquer tipo de dado aceito por uma propriedade, pode ser utilizado em data.-->
+
+<div id="app">
+  <p>{{frutas[0]}}</p>
+  <p>{{frutas[1]}}</p>
+  <p>{{objeto.item}}</p>
+  <p>{{comprou}}</p>
+</div>
+
+<script>
+  const vm = new Vue({
+    el: "#app",
+    data: {
+      comprou: true,
+      total: 49,
+      vitalicio: null,
+      objeto: {
+        item: "Item 1"
+      },
+      frutas: ["Banana", "Uva"]
+    }
+  });
+</script>
+
+<!--EXERCÍCIOS-->
+
+<!-- Acerte o código abaixo -->
+<div id="app">
+  {{_empresa}}, {{$produto}}
+</div>
+
+<script>
+const vm = new Vue({
+  el: "#app",
+  data: {
+    _empresa: "Apple",
+    $produto: "iPhone",
+  }
+});
+</script>
+
+<!-- Crie uma instância que mostre
+baseado no valor do lado do quadrado
+o seu perímetro (lX4) e área (lXl).
+O lado do quadrado deve ser um estado reativo -->
+
+
+</body>
+</html>
