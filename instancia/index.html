@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!--FUNÇÃO CONSTRUTORA-->
+
+  <!--São funções responsáveis pela construção de objetos. Assim como classes.-->
+
+  <script>
+    function VueClone(options) {
+    this.options = options;
+    this.el = document.querySelector(options.el);
+    this.data = options.data;
+  }
+  
+  const vm = new VueClone({
+    el: "#app",
+    data: {
+      produto: "Camisa"
+    }
+  });
+  </script>
+
+  <!--INSTÂNCIA VUE-->
+
+  <!--Vue é uma função construtora que recebe como argumento um objeto.-->
+
+  <script>
+    const vm = new Vue();
+
+    console.log(vm);
+    
+  </script>
+  
+  <!--PROPRIEDADES DE VUE-->
+
+  <!--As propriedades do objeto retornado com a função Vue, geralmente começam com $ e _, isso é feito para evitar conflito com propriedades que serão criadas internamento pelos usuários.-->
+
+  <script>
+    const vm = new Vue({
+    el: "#app",
+    data: {
+      instrumento: "Violão"
+    }
+  });
+
+  vm.$data;
+  // objeto {nome: "Violão"}
+  vm.$el;
+  // elemento #app
+
+  </script>
+
+  <!--ELEMENTO-->
+
+  <!--Passe o seletor da tag principal que será utilizada na instância do Vue.js. Geralmente são utilizados ID's, lembrando que para selecionar um ID é necessário o #.-->
+
+  <div id="app"></div>
+
+  <script>
+    const vm = new Vue({
+    el: "#app"
+  });
+  </script>
+
+  <!--ACESSO INTERNO-->
+
+  <!--A palavra chave this faz referência ao objeto que é retornado com a função construtora. Então dentro da instância this.$data é igual à vm.$data. Atenção ao contexto de this, o mesmo pode mudar se usado dentro de outras funções.-->
+
+  <script>
+    const vm = new Vue({
+    el: "#app",
+    data: {
+      nome: "Martelo",
+      cor: "Vermelho"
+    },
+    computed: {
+      tituloProduto() {
+        return this.ferramenta + " " + this.cor;
+      }
+    }
+  });
+  </script>
+
+  <!--CONTEXTO DE THIS-->
+
+  <!--Atenção ao contexto de this, o mesmo pode mudar se usado dentro de outras funções.-->
+
+  <script>
+    const vm = new Vue({
+    el: "#app",
+    data: {
+      nome: "Martelo"
+    },
+    computed: {
+      mostrar() {
+        setTimeout(function() {
+          console.log(this.nome);
+          // undefined
+        });
+        setTimeout(() => {
+          console.log(this.nome);
+          // Martelo
+        });
+        console.log(this.nome);
+        // Martelo
+      }
+    }
+  });
+  </script>
+
+  <!--EXERCÍCIOS-->
+
+  <!--Crie uma tag com o id app e inicie uma instância de Vue
+
+  Faça o HTML abaixo funcionar com Vue-->
+
+  <div id="app1">
+    {{ferramenta}}
+  </div>
+  <div id="app2">
+    {{instrumento}}
+  </div>
+  
+
+  
+  
+</body>
+</html>
