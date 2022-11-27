@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!--METHODS-->
+
+  <!--Métodos podem ser criados para serem utilizados na instância e também em diretivas. Lembrando que métodos são funções.-->
+
+  <div id="app">
+    <p>{{contador}}</p>
+    <button @click="incrementar">Incrementar</button>
+    <button @click="diminuir">Diminuir</button>
+  </div>
+
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        contador: 0,
+      },
+      methods: {
+        incrementar: function () {
+          this.contador++;
+        },
+        // sintaxe curta ES6
+        diminuir() {
+          this.contador--;
+        },
+      },
+    });
+  </script>
+
+   <!--Para acessar qualquer método ou data, precisamos do this dentro da instância.-->
+
+   <!--PARÂMETROS E ARGUMENTOS-->
+
+   <!--Podemos utilizar parâmetros dentro dos métodos.-->
+
+   <div id="app">
+    <p>{{compra}}</p>
+    <button @click="mudarCompra('Guitarra')">Guitarra</button>
+    <button @click="mudarCompra('Violão')">Violão</button>
+  </div>
+
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        compra: '',
+      },
+      methods: {
+        mudarCompra(instrumento) {
+          this.compra = instrumento;
+        },
+      },
+    });
+  </script>
+
+  <!--MÉTODO DENTRO DE MÉTODO-->
+
+  <!--O this possui acesso aos métodos também.-->
+
+  <div id="app">
+    <p>{{preco}}</p>
+    <button @click="adicionarCupom">Adicionar Cupom</button>
+    <p>{{alerta}}</p>
+  </div>
+
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        preco: 149,
+        alerta: '',
+      },
+      methods: {
+        adicionarCupom() {
+          this.preco *= 0.9;
+          this.alertaCupom();
+        },
+        alertaCupom() {
+          this.alerta = 'Cupom Adicionado';
+        },
+      },
+    });
+  </script>
+
+  <!--EXERCÍCIO-->
+
+  <!--
+  Utilizando a API
+  https://api.origamid.dev/stock/aapl/quote
+
+  Crie um método que faça o fetch da resposta acima
+  O método deve ser ativado ao clique no botão Ver Preço
+
+  Coloque a resposta json do fetch em uma data e
+  mostre o valor de lalestPrice, latestTime e o
+  companyName na interface.
+-->
+</body>
+</html>
