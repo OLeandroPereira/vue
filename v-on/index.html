@@ -1,80 +1,137 @@
-<!--V-IF-->
+<!--V-ON-->
 
-<!--O v-if é uma diretiva que permite utilizarmos condicionais para mostrar ou não um elemento. Podemos utilizar também o v-else que deve vir logo após o if para funcionar.-->
-
+<!--O v-on é uma diretiva que permite observarmos eventos nas tags.-->
 <body>
   <div id="app">
-    <p v-if="logado">Você está logado.</p>
-    <p v-else>Você não está logado.</p>
+    <button v-on:click="handleClick">Clique</a>
   </div>
 </body>
 
-<!--O v-else-if também existe.-->
-
 <script>
   const vm = new Vue({
-  el: "#app",
-  data: {
-    logado: true
-  }
+  el: '#app',
+  methods: {
+    handleClick(event) {
+      console.log(event);
+    },
+  },
 });
 </script>
 
-<!--GRUPOS-->
+<!--ATALHO @-->
 
-<!--Podemos agrupar um conteúdo com a tag <template>-->
+<!--O uso do arroba @click na frente do evento, é a mesma coisa que utilizarmos o v-on:click.-->
 
-  <body>
-    <div id="app">
-      <template v-if="logado">
-        <p>Você está logado.</p>
-        <button @click="logado = false">Deslogar</button>
-      </template>
-      <template v-else>
-        <p>Você não está logado.</p>
-        <button @click="logado = true">Logar</button>
-      </template>
-    </div>
-  </body>
+<body>
+  <div id="app">
+    <button @click="handleClick">Clique</a>
+  </div>
+</body>
 
-  <script>
-    const vm = new Vue({
-      el: "#app",
-      data: {
-        logado: false
-      }
-    });
-  </script>
+<script>
+  const vm = new Vue({
+  el: '#app',
+  methods: {
+    handleClick(event) {
+      console.log(event);
+    },
+  },
+});
+</script>
 
-  <!--V-SHOW VS V-IF-->
+<!--EXPRESSÕES-->
 
-  <!--O v-if remove o elemento, v-show apenas adicionar o display: none;. v-show é preferido se você for mudar constantemente o estado, por ser mais rápido.-->
+<!--Não precisa ser necessariamente um método, podemos usar expressões dentro dos eventos.-->
 
-  <body>
-    <div id="app">
-      <p v-show="logado">Show logado</p>
-      <p v-if="logado">If logado</p>
-    </div>
-  </body>
+<body>
+  <div id="app">
+    <button @click="ativo = !ativo">Ativar</button>
+    <p :class="ativo ? 'verde' : 'vermelho'">Texto de teste.</p>
+  </div>
+  
+</body>
 
-  <script>
-    const vm = new Vue({
-      el: "#app",
-      data: {
-        logado: false
-      }
-    });
-  </script>
+<script>
+  const vm = new Vue({
+  el: '#app',
+  data: {
+    ativo: true,
+  },
+});
+</script>
 
-  <!--EXERCÍCIO-->
+<!--MODIFICADORES-->
 
-  <!--
-  Simule a adição de um produto no carrinho
-  este produto possui estoque de 7 itens
-  (utilize a mesma ideia do contador).
+<!--Algumas diretivas possuem modificadores. Estes são utilizados através do .. No caso de eventos, event.preventDefault() pode ser adicionar com o @click.prevent.-->
 
-  Ao atingir 7 itens mostre uma mensagem informando
-  não ser possível adicionar mais do que 7 itens.
+<body>
+  <div id="app">
+    <a @click.prevent="scrollSuave" href="#interno">Prevent</a>
+    <a @click.once="scrollSuave" href="#interno">Once</a>
+    <a @click.prevent.once="scrollSuave" href="#interno">Once</a>
+  </div>
+</body>
 
-  Remova também o botão de adicionar itens.
+<script>
+  const vm = new Vue({
+  el: '#app',
+  methods: {
+    scrollSuave() {
+      console.log('Scroll Suave');
+    },
+  },
+});
+</script>
+
+<!--Lista com modificadores https://vuejs.org/v2/api/#v-on-->
+
+<!--OUTROS EVENTOS-->
+
+<!--Podemos adicionar diversos eventos como @keyup, @mouseenter, @change e mais.-->
+
+<body>
+  <div id="app">
+    <div @mousemove="handleMouse">Mouse X: {{mouse.x}}</div>
+    <input @keyup="handleKey" type="text" />
+  </div>
+</body>
+
+<script>
+  const vm = new Vue({
+  el: '#app',
+  data: {
+    mouse: '',
+  },
+  methods: {
+    handleKey(event) {
+      console.log(event.key);
+    },
+    handleMouse(event) {
+      this.mouse = event;
+    },
+  },
+});
+</script>
+
+<!--EXERCÍCIO-->
+
+<ul>
+  <li><a href="https://api.origamid.dev/stock/aapl/quote">Apple</a></li>
+  <li><a href="https://api.origamid.dev/stock/googl/quote">Google</a></li>
+  <li><a href="https://api.origamid.dev/stock/amzn/quote">Amazon</a></li>
+  <li><a href="https://api.origamid.dev/stock/ebay/quote">Ebay</a></li>
+  <li><a href="https://api.origamid.dev/stock/pypl/quote">Paypal</a></li>
+</ul>
+
+<div></div>
+<!--
+  Utilizando API
+  https://api.origamid.dev/stock/aapl/quote
+
+  Adicione um evento de clique a cada <a> do html
+  acima e previna o comportamento padrão.
+
+  Faça o fetch dos dados do href ao click e mostre na
+  interface o companyName, latestPrice, marketCap
 -->
+

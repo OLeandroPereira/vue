@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!--V-BIND-->
+
+  <!--O v-bind é uma diretiva que permite a utilização de expressões dentro de atributos html.-->
+
+  <div id="app">
+    <a v-bind:href="link">Link Google</a>
+    <p v-bind:class="cor">Parágrafo</p>
+  </div>
+  
+
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        link: 'https://www.google.com',
+        cor: 'azul',
+      },
+    });
+  </script>
+
+<!--O valor após os : é considerado o argumento da diretiva.-->
+
+<!--ATALHO :-->
+
+<!--O uso de dois pontos :href na frente de um atributo html, é a mesma coisa que utilizarmos o v-bind:href-->
+
+<div id="app">
+  <a :href="link">Link Google</a>
+  <p :class="cor">Parágrafo</p>
+</div>
+
+<script>
+  const vm = new Vue({
+    el: '#app',
+    data: {
+      link: 'https://www.google.com',
+      cor: 'azul',
+    },
+  });
+
+</script>
+
+<!--PODEMOS UTILIZAR OS ATRIBUTOS-->
+
+<!--É possível utilizar os atributos normais junto com as diretivas. Se o atributo permitir apenas um valor, o último será o utilizado.-->
+
+<div id="app">
+  <a :href="link" href="https://www.origamid.com">Link Google</a>
+  <p :class="cor" class="p1">Parágrafo</p>
+</div>
+
+<script>
+  const vm = new Vue({
+    el: '#app',
+    data: {
+      link: 'https://www.google.com',
+      cor: 'azul',
+    },
+  });
+
+</script>
+
+
+<!--EXPRESSÕES EM DIRETIVAS-->
+
+<!--Expressões podem ser utilizados dentro dos valores.-->
+
+<div id="app"><p :class="comprou ? 'verde' : 'vemelho'">Comprou</p></div>
+
+<script>
+  const vm = new Vue({
+    el: '#app',
+    data: {
+      comprou: true,
+    },
+  });
+</script>
+<!--EXERCÍCIO-->
+
+<!--
+  Utilizando as API's
+  https://api.origamid.dev/stock/aapl/quote
+  https://api.origamid.dev/stock/googl/quote
+
+  - Compare o marketCap (valor de
+  mercado) entre ambas.
+
+  - Mostre o nome das empresas e o valor
+  na interace (companyName e marketCap).
+
+  - Mude a cor para verde o nome da empresa com
+  maior marketCap e vermelho a com menor.
+-->
+
+
+</body>
+</html>
