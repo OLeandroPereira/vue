@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="./vue.js"></script>
+  <title>Vue.js</title>
+</head>
+<body>
+  <div id="app">
+    <tempo-hoje></tempo-hoje>
+  </div>
+
+  <script type="module">
+    import TempoHoje from "./componentes/TempoHoje.js";
+
+    Vue.component("TempoHoje", TempoHoje);
+
+
+
+    const vm = new Vue({
+      el: "#app",
+    })
+
+
+  </script>
+</body>
+</html>
